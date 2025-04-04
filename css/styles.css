@@ -115,6 +115,9 @@ html {
 }
 
 .content-box {
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Agrega esta propiedad */
     width: 0;
     height: 0;
     background: rgba(0, 0, 0, 0.7);
@@ -271,9 +274,8 @@ section h3 {
 }
 
 .content {
+    flex: 1;
     overflow-y: scroll;
-    height: 100%;
-    max-height: 75vh;
     scroll-behavior: smooth;
 }
 
@@ -281,9 +283,6 @@ section h3 {
 @media (max-height: 725px) or (max-width: 500px) {
     .content-box.active {
         max-height: 70vh; /* Ajusta el margen inferior/superior según convenga */
-    }
-    .content {
-        max-height: 64vh;
     }
     #paso_severino {
         flex-direction: column;
@@ -316,9 +315,6 @@ section h3 {
 @media (max-height: 600px) {
     .content-box.active {
         max-height: 65vh; /* Ajusta el margen inferior/superior según convenga */
-    }
-    .content {
-        max-height: 57vh;
     }
 }
 
@@ -367,20 +363,53 @@ section h3 {
 
 /* Indicadores de lectura: triángulos hechos con CSS */
 .arrow {
+    font-family: sans-serif;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
-    color: #00A300;
+    font-size: clamp(15px, 7vw, 30px);;
+    color: #E8E8E8;//#00A300;
+    -webkit-text-stroke: 1px #ff0e6c;
+    text-shadow:
+      -1px -1px 0 #ff0e6c,
+       1px -1px 0 #ff0e6c,
+      -1px  1px 0 #ff0e6c,
+       1px  1px 0 #ff0e6c;
     transition: opacity 0.3s;
 }
 
 .arrow.up {
-    top: 0.6vh;
+    top: 10px;//0.6vh;
 }
 
 .arrow.down {
-    bottom: 0vh;
+    bottom: 10px;//0vh;
+}
+
+/* Animación arriba */
+.bounce-up {
+  animation: bounceUp 1.5s infinite;
+}
+@keyframes bounceUp {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+/* Animación abajo */
+.bounce-down {
+  animation: bounceDown 1.5s infinite;
+}
+@keyframes bounceDown {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
 }
 
 .hidden {
