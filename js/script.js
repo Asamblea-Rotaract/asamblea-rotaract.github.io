@@ -22,17 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const clientHeight = content.clientHeight;
             const scrollHeight = content.scrollHeight;
 
-            if (scrollTop === 0) {
-                arrowUp.classList.add("hidden");
-            } else {
-                arrowUp.classList.remove("hidden");
-            }
+	    const tolerance = 2;
 
-            if (scrollTop + clientHeight >= scrollHeight) {
-                arrowDown.classList.add("hidden");
-            } else {
-                arrowDown.classList.remove("hidden");
-            }
+	    if (scrollTop <= tolerance) {
+            	arrowUp.classList.add("hidden");
+	    } else {
+            	arrowUp.classList.remove("hidden");
+    	    }
+
+    	    if (scrollTop + clientHeight >= scrollHeight - tolerance) {
+            	arrowDown.classList.add("hidden");
+    	    } else {
+            	arrowDown.classList.remove("hidden");
+    	    }
 
             isScrolling = false;
         });
@@ -71,6 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }, 500);
     }
+
+    arrowUp.addEventListener("click", () => {
+    	content.scrollTo({
+    	    top: 0,
+    	    behavior: "smooth"
+    	});
+    });
+
+    arrowDown.addEventListener("click", () => {
+    	content.scrollTo({
+    	    top: content.scrollHeight - content.clientHeight,
+    	    behavior: "smooth"
+        });
+    });
 
     content.addEventListener("scroll", checkScroll);
     window.addEventListener("load", checkScroll);
