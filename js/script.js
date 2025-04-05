@@ -52,6 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentBox.classList.add('active');
                 setTimeout(() => {
                     contentBox.classList.add('expanded');
+		    setTimeout(() => {
+			content.classList.add('visible');
+			arrowUp.classList.add('visible');
+			arrowDown.classList.add('visible');
+		    }, 500);
                 }, 500);
             }, 500);
         }, 500);
@@ -60,17 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function reverseAnimation() {
         if (!started) return;
         started = false;
-        contentBox.classList.remove('expanded');
+        content.classList.remove('visible');
+	arrowUp.classList.add('hiden');
+	arrowDown.classList.add('hiden');
         setTimeout(() => {
-            contentBox.classList.remove('active');
-            navbar.classList.remove('visible');
-            setTimeout(() => {
-                startScreen.style.display = 'flex';
-                setTimeout(() => {
-                    startScreen.style.opacity = '1';
-                    pressStart.style.animation = ''; // Detiene la animación de parpadeo
-                }, 50);
-            }, 500);
+            contentBox.classList.remove('expanded');
+	    setTimeout(() => {
+		contentBox.classList.remove('active');
+            	navbar.classList.remove('visible');
+            	setTimeout(() => {
+                    startScreen.style.display = 'flex';
+                    setTimeout(() => {
+                    	startScreen.style.opacity = '1';
+                    	pressStart.style.animation = ''; // Detiene la animación de parpadeo
+                    }, 50);
+            	}, 500);
+            },500);
         }, 500);
     }
 

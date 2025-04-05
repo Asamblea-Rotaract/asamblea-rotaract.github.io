@@ -10,7 +10,7 @@ body {
     background: url('../assets/images/Fondo-Asamblea.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #E8E8E2;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
 }
@@ -40,7 +40,7 @@ html {
     /*color: #E8E8E8;
     font-size: 20px;*/
     height: auto;
-    width: clamp(125px, 60vw, 250px);
+    width: clamp(30px, 20vw, 70px);
     filter: invert(31%) sepia(98%) saturate(5864%) hue-rotate(315deg) brightness(92%) contrast(101%);
 }
 
@@ -107,8 +107,8 @@ html {
 .main-content {
     position: relative;
     flex-grow: 1;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    //margin-top: 5px;
+    //margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +119,7 @@ html {
     flex-direction: column;
     position: relative; /* Agrega esta propiedad */
     width: 0;
+    max-width: 1200px;
     height: 0;
     background: rgba(0, 0, 0, 0.7);
     border: 4px solid #00A300;
@@ -136,7 +137,6 @@ html {
 
 .content-box.expanded {
     width: 75vw;
-    max-width: 1200px;
 }
 
 .content h3 {
@@ -275,11 +275,25 @@ section h3 {
 .content {
     flex: 1;
     overflow-y: scroll;
+    overflow-x: hidden;
     scroll-behavior: smooth;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.content.visible {
+    opacity: 1;
 }
 
 /* Media query para pantallas con altura limitada */
 @media (max-height: 725px) or (max-width: 500px) {
+    .nav-links {
+    	flex-direction: column; /* Apilar los <li> verticalmente */
+	//align-items: flex-end; /* Alinearlos a la derecha */
+    }
+    .nav-links li:not(:last-child) {
+    	margin-bottom: 5px;
+    }
     .content-box.active {
         max-height: 70vh; /* Ajusta el margen inferior/superior según convenga */
     }
